@@ -1,2 +1,5 @@
 marcoQ -- 2025-03-31 22:52
 * Updated design doc by including explanation of what dataset and where it comes from, redoing component map digitally in accordance with listed components, updating how database will store graphs, and completed Python pandas section.
+
+abidurR -- 2025-04-01 11:16
+* Updated root-level readme to include project description and summary.
