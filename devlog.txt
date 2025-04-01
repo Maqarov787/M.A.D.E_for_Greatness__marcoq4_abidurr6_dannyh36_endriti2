@@ -3,3 +3,6 @@ marcoQ -- 2025-03-31 22:52
 
 abidurR -- 2025-04-01 11:16
 * Updated root-level readme to include project description and summary.
+
+dannyH -- 2025-04-01 11:27
+* Updated __init__.py to make flask app deployable.
