@@ -1,17 +1,11 @@
-from flask import Flask, render_template, url_for, session, request, redirect
-import os, json, urllib.request, datetime
-
+from flask import Flask
 app = Flask(__name__)
 
-app.secret_key = os.urandom(32)
-
-##########################################
-@app.route("/", methods=['GET', 'POST'])
-def home():
-
-    return render_template('home.html', loggedin=False)
-
-##########################################
-if __name__ == "__main__":
-    app.debug = True
+@app.route("/")
+def main():
+    return "Project 4"
+    
+    
+if __name__ == "__main__":  # true if this file NOT imported
+    app.debug = True        # enable auto-reload upon code change
     app.run()
