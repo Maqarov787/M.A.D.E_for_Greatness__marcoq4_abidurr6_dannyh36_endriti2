@@ -6,3 +6,10 @@ abidurR -- 2025-04-01 11:16
 
 dannyH -- 2025-04-01 11:27
 * Updated __init__.py to make flask app deployable.
+
+marcoQ -- 2025-04-01 22:33
+* Updated requirements.txt
+* Set up virtual machine to serve flask app from domain maqarovgulag.tech
+
+abidurR -- 2025-04-02 11:30
+* Added components in static and templates folder
