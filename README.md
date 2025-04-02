@@ -47,3 +47,7 @@
         $ python3 __init__.py
 
 4. Open the app in a browser by navigating to <a href="http://127.0.0.1:5000">127.0.0.1:5000</a>
+
+OR
+
+1. Click <a href="http://maqarovgulag.tech">this link</a> to visit our website. No further installations required.
