@@ -6,6 +6,6 @@ def main():
     return "Project 4"
     
     
-if __name__ == "__main__":  # true if this file NOT imported
-    app.debug = True        # enable auto-reload upon code change
-    app.run()
+if __name__ == "__main__": 
+    app.debug = True       
+    app.run(host='0.0.0.0')
