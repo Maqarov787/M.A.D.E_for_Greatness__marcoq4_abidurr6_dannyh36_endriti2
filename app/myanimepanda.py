@@ -1,19 +1,21 @@
 import pandas as pd
+import re
 anime = pd.read_csv("static/anime.csv")
 
 #Mutator methods
-def keep_500():
-    dropped_anime = anime[anime["popularity"] > 500].index
+def keep():
+    dropped_anime = anime[anime["popularity"] > 1000].index
     anime.drop(dropped_anime, inplace=True)
 
 def remove_nsfw():
     nsfw_anime = anime[anime["nsfw"] != "white"].index
     anime.drop(nsfw_anime, inplace=True)
 
-'''def filter_chars():
+def filter_chars():
 #Will filter out special characters in any of the data.
-    invalid_chars = anime[anime["title"].str.match("^[a-zA-Z0-9 ]")].index
-    anime.drop(invalid_chars, inplace=True)'''
+#Warning: Consulted with the AI overlords (GPT-4o) to construct this method. The prompt given was "how would I filter out rows of data in python pandas that contain non-ascii characters?"
+
+    anime = anime[anime["title"].apply(lambda x: x.isascii())]
 
 def drop_columns():
     anime.drop(["id", "created_at", "updated_at", "alternative_titles_en", "alternative_titles_ja", "alternative_titles_synonyms"], axis=1, inplace=True)
@@ -34,8 +36,8 @@ remove_zero_mean()
 remove_zero_popularity()
 drop_columns()
 remove_nsfw()
-#filter_chars()
-keep_500()
+filter_chars()
+keep()
 sort()
 print(len(anime))
 #print(anime.to_string())
