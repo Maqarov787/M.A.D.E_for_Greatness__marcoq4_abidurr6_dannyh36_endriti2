@@ -15,7 +15,7 @@ def filter_chars():
 #Will filter out special characters in any of the data.
 #Warning: Consulted with the AI overlords (GPT-4o) to construct this method. The prompt given was "how would I filter out rows of data in python pandas that contain non-ascii characters?"
 
-    anime = anime[anime["title"].apply(lambda x: x.isascii())]
+    filtered_anime = anime[anime["title"].apply(lambda x: x.isascii())]
 
 def drop_columns():
     anime.drop(["id", "created_at", "updated_at", "alternative_titles_en", "alternative_titles_ja", "alternative_titles_synonyms"], axis=1, inplace=True)
@@ -41,4 +41,4 @@ keep()
 sort()
 print(len(anime))
 #print(anime.to_string())
-print(anime.iloc[0:50, 8:12])
+print(anime.iloc[0:50, 0])
