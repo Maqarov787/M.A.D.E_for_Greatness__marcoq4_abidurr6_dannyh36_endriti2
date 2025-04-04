@@ -19,3 +19,6 @@ marcoQ -- 2025-04-02 11:41
 
 dannyH -- 2025-04-02 11:43
 * Set up Jinja template routes in __init__.py, resolved problem in serving site in test droplet.
+
+marcoQ -- 2025-04-04 10:07
+* Completed mutator methods on anime.csv that make it valid data using PythonPandas
