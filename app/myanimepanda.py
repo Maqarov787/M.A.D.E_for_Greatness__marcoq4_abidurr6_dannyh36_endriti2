@@ -30,6 +30,7 @@ def sort():
     anime.sort_values(by=["popularity"], inplace=True)
 
 #Accessor Methods
+
 remove_zero_mean()
 remove_zero_popularity()
 drop_columns()
