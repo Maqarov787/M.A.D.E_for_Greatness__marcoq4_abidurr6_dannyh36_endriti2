@@ -22,3 +22,6 @@ dannyH -- 2025-04-02 11:43
 
 marcoQ -- 2025-04-04 10:07
 * Completed mutator methods on anime.csv that make it valid data using PythonPandas
+
+dannyH -- 2025-04-06 12:10
+* Completed initial Signin, Signout html templates
