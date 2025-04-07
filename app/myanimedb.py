@@ -43,7 +43,8 @@ def addGraph(userID, file_name):
 
         c.execute(f"SELECT graph{i} FROM userData WHERE userID = {userID}")
         graph = c.fetchone()
-        if graph is not None:
+        print("Current graph: " + str(graph))
+        if list(graph)[0] is None:
             fin = list(graph)[0]
             col = i
             #graphName = graph + str(col)
@@ -104,6 +105,8 @@ addUser("sunjinwoo", "arise")
 #addGraphColumn()
 #addGraphColumn()
 addGraph(0, "test.jpg")
+addGraph(0, "test2.jpg")
+addGraph(1, "pie.jpg")
 print("Should be: maq. Result: " + str(getUserName(0)))
 print("Should be: arise. Result: " + str(getPassword(1)))
 allUserData()
