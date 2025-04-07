@@ -27,19 +27,36 @@ def addUser(username, password):
     db.commit()
     db.close()
 
-def addGraphColumn():
+def addGraph(userID, file_name):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    #Note: This returns the number of columns in a data set
     c.execute("SELECT * FROM userData")
     num_cols = len(list(c.fetchone()))
-    #print(num_cols)
+    last = num_cols - 3
+    i = 0
+    col = 0
 
-    graphName = f"graph{num_cols - 3}"
-    c.execute(f"ALTER TABLE userData ADD {graphName} INTEGER")
+    while i <= last:
+        if i == last:
+            c.execute(f"ALTER TABLE userData ADD graph{last} INTEGER")
+            last = last + 1
+
+        c.execute(f"SELECT graph{i} FROM userData WHERE userID = {userID}")
+        graph = c.fetchone()
+        if graph is not None:
+            fin = list(graph)[0]
+            col = i
+            #graphName = graph + str(col)
+            i += last + 1
+
+        i = i + 1
+
+
+    c.execute(f"UPDATE userData SET graph{col} = ? WHERE userID = ?", (file_name, userID))
 
     db.commit()
     db.close()
+
 
 #Accessor methods
 
@@ -79,11 +96,14 @@ def getGraph(userID, colNum):
     db.commit()
     db.close()
     return fin
+
+#Testing Area
 createTable()
 addUser("maq", "787")
 addUser("sunjinwoo", "arise")
 #addGraphColumn()
 #addGraphColumn()
+addGraph(0, "test.jpg")
 print("Should be: maq. Result: " + str(getUserName(0)))
 print("Should be: arise. Result: " + str(getPassword(1)))
 allUserData()
