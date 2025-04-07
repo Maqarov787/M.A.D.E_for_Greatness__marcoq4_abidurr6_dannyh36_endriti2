@@ -25,3 +25,6 @@ marcoQ -- 2025-04-04 10:07
 
 dannyH -- 2025-04-06 12:10
 * Completed initial Signin, Signout html templates
+
+marcoQ -- 2025-04-06 23:51
+* Completed database mutator and accessor methods (Further testing needed and additional methods could be added once flask and sqlite3 implementation begins)
