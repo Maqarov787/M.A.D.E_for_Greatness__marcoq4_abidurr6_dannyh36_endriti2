@@ -3,7 +3,7 @@ import array
 
 DB_FILE = "anime.db"
 
-
+#Mutator Methods
 def createTable():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
@@ -30,10 +30,10 @@ def addUser(username, password):
 def addGraphColumn():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    #Note: This returns the number of columns in a
+    #Note: This returns the number of columns in a data set
     c.execute("SELECT * FROM userData")
     num_cols = len(list(c.fetchone()))
-    print(num_cols)
+    #print(num_cols)
 
     graphName = f"graph{num_cols - 3}"
     c.execute(f"ALTER TABLE userData ADD {graphName} INTEGER")
@@ -41,7 +41,10 @@ def addGraphColumn():
     db.commit()
     db.close()
 
+#Accessor methods
+
 def allUserData():
+#For print statements only
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     c.execute("SELECT * FROM userData")
@@ -49,9 +52,38 @@ def allUserData():
     print("users: ")
     print(prin)
 
+def getUserName(userID):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    res = c.execute(f"SELECT username FROM userData where userID = {userID}")
+    fin = list(res.fetchone())[1]
+
+    db.commmit()
+    db.close()
+    return fin
+def getPassword(userID):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    res = c.execute(f"SELECT password FROM userData where userID = {userID}")
+    fin = list(res.fetchone())[2]
+
+    db.commmit()
+    db.close()
+    return fin
+def getGraph(userID, colNum):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    res = c.execute(f"SELECT graph{colNum} FROM userData where userID = {userID}")
+    fin = list(res.fetchone())[0]
+
+    db.commmit()
+    db.close()
+    return fin
 createTable()
 addUser("maq", "787")
 addUser("sunjinwoo", "arise")
-addGraphColumn()
-addGraphColumn()
+#addGraphColumn()
+#addGraphColumn()
+print("Should be: maq. Result: " + getUserName(0))
+print("Should be: arise. Result: " + getPassword(1))
 allUserData()
