@@ -1,4 +1,5 @@
 import sqlite3
+import array
 
 DB_FILE = "anime.db"
 
@@ -26,6 +27,20 @@ def addUser(username, password):
     db.commit()
     db.close()
 
+def addGraphColumn():
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    #Note: This returns the number of columns in a
+    c.execute("SELECT * FROM userData")
+    num_cols = len(list(c.fetchone()))
+    print(num_cols)
+
+    graphName = f"graph{num_cols - 3}"
+    c.execute(f"ALTER TABLE userData ADD {graphName} INTEGER")
+
+    db.commit()
+    db.close()
+
 def allUserData():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
@@ -37,4 +52,6 @@ def allUserData():
 createTable()
 addUser("maq", "787")
 addUser("sunjinwoo", "arise")
+addGraphColumn()
+addGraphColumn()
 allUserData()
