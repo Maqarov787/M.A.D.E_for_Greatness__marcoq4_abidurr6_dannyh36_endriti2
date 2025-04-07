@@ -56,18 +56,18 @@ def getUserName(userID):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     res = c.execute(f"SELECT username FROM userData where userID = {userID}")
-    fin = list(res.fetchone())[1]
+    fin = list(res.fetchone())[0]
 
-    db.commmit()
+    db.commit()
     db.close()
     return fin
 def getPassword(userID):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     res = c.execute(f"SELECT password FROM userData where userID = {userID}")
-    fin = list(res.fetchone())[2]
+    fin = list(res.fetchone())[0]
 
-    db.commmit()
+    db.commit()
     db.close()
     return fin
 def getGraph(userID, colNum):
@@ -76,7 +76,7 @@ def getGraph(userID, colNum):
     res = c.execute(f"SELECT graph{colNum} FROM userData where userID = {userID}")
     fin = list(res.fetchone())[0]
 
-    db.commmit()
+    db.commit()
     db.close()
     return fin
 createTable()
@@ -84,6 +84,6 @@ addUser("maq", "787")
 addUser("sunjinwoo", "arise")
 #addGraphColumn()
 #addGraphColumn()
-print("Should be: maq. Result: " + getUserName(0))
-print("Should be: arise. Result: " + getPassword(1))
+print("Should be: maq. Result: " + str(getUserName(0)))
+print("Should be: arise. Result: " + str(getPassword(1)))
 allUserData()
