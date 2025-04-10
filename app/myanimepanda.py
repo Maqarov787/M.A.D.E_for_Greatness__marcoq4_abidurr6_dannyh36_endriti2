@@ -41,12 +41,22 @@ def valid_data():
     sort()
 #Accessor Methods
 
-'''def filtered_anime(category, spec_categories):
-    if spec_categories.len() > 0:
-        anime_filter
-    else:'''
+def correspondence():
+#function for line graph
+    pop = anime['popularity'].tolist()
+    mean = anime['mean'].tolist()
+    return [pop, mean]
 
+def filtered_anime(cat, spec_cat):
+#function for bar graph/pie chart
+#cat and spec_cat are both arrays. cat has to have at least one
+    return "nothing"
+
+def anime_name(popularity):
+    return anime.loc[anime['popularity'] == popularity]
 valid_data()
-print(len(anime))
+#print(len(anime))
 #print(anime.to_string())
-print(anime.iloc[0:50, 0])
+print(anime.iloc[380:400, 8:12])
+print(anime_name(300))
+#print(correspondence())
