@@ -47,16 +47,27 @@ def correspondence():
     mean = anime['mean'].tolist()
     return [pop, mean]
 
-def filtered_anime(cat, spec_cat):
+def filtered_anime(cats, spec_cats):
 #function for bar graph/pie chart
 #cat and spec_cat are both arrays. cat has to have at least one
-    return "nothing"
+    if len(spec_cats) == 0:
+        ani_fil = anime.loc[:, cats]
+        return ani_fil
+    else:
+        ani_fil = anime[cats]
+        return "Test. cats not working probably"
 
 def anime_name(popularity):
     return anime.loc[anime['popularity'] == popularity]
+
+#Testing Area
 valid_data()
-#print(len(anime))
+print(len(anime))
 #print(anime.to_string())
-print(anime.iloc[380:400, 8:12])
-print(anime_name(300))
+#print(anime.iloc[380:400, 8:12])
+#print(anime_name(300))
+test1 = filtered_anime(['popularity', 'genres'], [])
+print(test1)
+print(len(test1))
+
 #print(correspondence())
