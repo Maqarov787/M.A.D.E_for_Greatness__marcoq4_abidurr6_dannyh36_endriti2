@@ -18,6 +18,35 @@ Target Ship Date: 2025-04-21
 </head>
 
 <body class="bg-white text-black font-sans">
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+
+  <script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: '{{ __type__ }}',
+      data: {
+        labels: {{ __label_array__ | safe }},
+        datasets: [{
+          label: '{{ __label__ | safe }}',
+          data: {{ __data_array__ | safe}},
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
 </body>
 
 </html>

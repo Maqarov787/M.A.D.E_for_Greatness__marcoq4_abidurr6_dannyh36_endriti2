@@ -10,11 +10,12 @@ Target Ship Date: 2025-04-21
 
 import os
 from flask import Flask
-from flask import render_template  
-from flask import request           
+from flask import render_template
+from flask import request
 from flask import session
 from flask import redirect
 import myanimedb as db
+import json
 
 app = Flask(__name__)
 secret = os.urandom(32)
@@ -35,24 +36,27 @@ def checkPassword(username, password):
 @app.route("/", methods=['GET', 'POST'])
 def main():
     if 'username' in session.keys():
-        user = session['username']
-    
-    return render_template("main.html", user = user)
+        user = json.dumps(session['username'])
+        return render_template("main.html", user = user)
+    else:
+        return render_template("main.html")
 
 @app.route("/filter", methods=['GET', 'POST'])
 def filter():
     if 'username' in session.keys():
-        user = session['username']
-    return render_template("filter.html", user=user)
+        user = json.dumps(session['username'])
+        return render_template("filter.html", user=user)
+    else:
+        return render_template('filter.html')
 
 @app.route("/graph", methods=['GET', 'POST'])
 def graph():
-    return render_template("graph.html")     
+    return render_template("graph.html")
 
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
     return render_template("profile.html")
-    
+
 @app.route("/signin", methods=['GET', 'POST'])
 def signin():
     if  'username' in session.keys() and session['username'] is not None:
@@ -94,6 +98,6 @@ def taste():
     return render_template("taste.html")
 
 
-if __name__ == "__main__": 
-    app.debug = True      
+if __name__ == "__main__":
+    app.debug = True
     app.run(host='0.0.0.0', port=8000)

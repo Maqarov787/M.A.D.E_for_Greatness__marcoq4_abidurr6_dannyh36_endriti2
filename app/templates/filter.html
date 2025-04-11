@@ -15,9 +15,11 @@ Target Ship Date: 2025-04-21
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../static/frontend.js"></script>
-    <script type="javascript">
-        user = {% if user is None %}
-    </script>
+    {% block javascript %}
+        <script>
+            var user = JSON.parse({{ user | safe }})
+        </script>
+    {% endblock %} 
     <title>Main</title>
 </head>
 

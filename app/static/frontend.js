@@ -1,3 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-    if user is 
+    if (typeof user !== 'undefined'){
+        console.log(user)    
+    }
 });
