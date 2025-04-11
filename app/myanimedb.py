@@ -113,4 +113,4 @@ def getGraph(username, colNum):
 # print("Should be: maq. Result: " + str(getUserName(0)))
 # print("Should be: arise. Result: " + str(getPassword(1)))
 # allUserData()
-getUserName("maq")
+#getUserName("maq")
