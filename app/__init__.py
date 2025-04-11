@@ -20,13 +20,30 @@ app = Flask(__name__)
 secret = os.urandom(32)
 app.secret_key = secret
 
+def checkUser(username):
+    user = db.getUserName(username)
+    if user is None:
+        return False
+    return user[0] == username
+
+def checkPassword(username, password):
+    pw = db.getPassword(username)
+    if pw is None:
+        return False
+    return pw[0] == password
+
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    return render_template("main.html")
+    if 'username' in session.keys():
+        user = session['username']
+    
+    return render_template("main.html", user = user)
 
 @app.route("/filter", methods=['GET', 'POST'])
 def filter():
-    return render_template("filter.html")
+    if 'username' in session.keys():
+        user = session['username']
+    return render_template("filter.html", user=user)
 
 @app.route("/graph", methods=['GET', 'POST'])
 def graph():
@@ -43,9 +60,9 @@ def signin():
     elif request.method == "POST":
         username = request.form.get('username')
         password = request.form.get('pw')
-        if db.getUserName(username) is None:
+        if not checkUser(username):
            return render_template("signin.html", message="This user does not exist")
-        if db.getPassword(username) != password:
+        if not checkPassword(username, password):
            return render_template("signin.html", message="Incorrect Password")
         session['username'] = username
         session['password'] = password
@@ -59,7 +76,7 @@ def signup():
     elif request.method == 'POST':
         username = request.form['username']
         password = request.form['pw']
-        if db.getUserName(username) is None:
+        if not checkUser(username):
             db.addUser(username, password)
             return redirect('/signin')
         else:
