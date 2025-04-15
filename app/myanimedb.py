@@ -73,24 +73,26 @@ def allUserData():
 def getUserName(username):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    res = c.execute(f"SELECT username FROM userData where username = '{username}'")
     try:
-        fin = res.fetchone()[0]
+        fin = c.execute(f"SELECT username FROM userData where username = '{username}'").fetchone()
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
         fin = None
+    print("___________________")
+    print(fin)
     db.commit()
     db.close()
     return fin
+
 def getPassword(username):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     res = c.execute(f"SELECT password FROM userData where username = '{username}'")
-    fin = list(res.fetchone())[0]
-
+    fin = res.fetchone()
     db.commit()
     db.close()
     return fin
+
 def getGraph(username, colNum):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
@@ -113,4 +115,4 @@ def getGraph(username, colNum):
 # print("Should be: maq. Result: " + str(getUserName(0)))
 # print("Should be: arise. Result: " + str(getPassword(1)))
 # allUserData()
-getUserName("maq")
+#getUserName("maq")

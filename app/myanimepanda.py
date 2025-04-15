@@ -40,20 +40,34 @@ def valid_data():
     keep()
     sort()
 #Accessor Methods
-'''
-def filtered_anime(categories, types):
-#Returns a dataframe that is a filtered version of anime based on the category and specific categories
-    if spec_categories.len() > 0:
+
+def correspondence():
+#function for line graph
+    pop = anime['popularity'].tolist()
+    mean = anime['mean'].tolist()
+    return [pop, mean]
+
+def filtered_anime(cats, spec_cats):
+#function for bar graph/pie chart
+#cat and spec_cat are both arrays. cat has to have at least one
+    if len(spec_cats) == 0:
+        ani_fil = anime.loc[:, cats]
+        return ani_fil
     else:
-        anime_filter = anime[anime[category]]
-    '''
-#def rating(categories, types):
-#Returns the mean integers of the popularity and mean of the anime that fulfill the given filters.
+        ani_fil = anime[cats]
+        return "Test. cats not working probably"
 
-#def comparison(anime1, anime2):
-#Returns the stats for each of the anime as a dataframe to be used for a radar chart.
+def anime_name(popularity):
+    return anime.loc[anime['popularity'] == popularity]
 
+#Testing Area
 valid_data()
 print(len(anime))
 #print(anime.to_string())
-print(anime.iloc[0:50, 0])
+#print(anime.iloc[380:400, 8:12])
+#print(anime_name(300))
+test1 = filtered_anime(['popularity', 'genres'], [])
+print(test1)
+print(len(test1))
+
+#print(correspondence())
