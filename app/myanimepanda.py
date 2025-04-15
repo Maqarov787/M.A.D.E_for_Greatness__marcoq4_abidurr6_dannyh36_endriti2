@@ -13,7 +13,7 @@ def remove_nsfw():
 
 def filter_chars():
 #Will filter out special characters in any of the data.
-#Warning: Consulted with the AI overlords (GPT-4o) to construct this method. The prompt given was "how would I filter out rows of data in python pandas that contain non-ascii characters?"
+#Warning: Consulted with the AI overlords (GPT-4o) to construct this method. The prompt given was "how would I filter out rows of data in python pandas that contain non-ascii characters?
     global anime
     anime = anime[anime["title"].apply(lambda x: x.isascii())]
 
@@ -40,11 +40,18 @@ def valid_data():
     keep()
     sort()
 #Accessor Methods
-
-'''def filtered_anime(category, spec_categories):
+'''
+def filtered_anime(categories, types):
+#Returns a dataframe that is a filtered version of anime based on the category and specific categories
     if spec_categories.len() > 0:
-        anime_filter
-    else:'''
+    else:
+        anime_filter = anime[anime[category]]
+    '''
+#def rating(categories, types):
+#Returns the mean integers of the popularity and mean of the anime that fulfill the given filters.
+
+#def comparison(anime1, anime2):
+#Returns the stats for each of the anime as a dataframe to be used for a radar chart.
 
 valid_data()
 print(len(anime))
