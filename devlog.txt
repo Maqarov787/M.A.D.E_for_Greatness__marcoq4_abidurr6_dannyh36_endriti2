@@ -29,6 +29,9 @@ dannyH -- 2025-04-06 12:10
 marcoQ -- 2025-04-06 23:51
 * Completed database mutator and accessor methods (Further testing needed and additional methods could be added once flask and sqlite3 implementation begins)
 
+endritI -- 2025-04-10 11:46
+* ADded JS features to graph.html and variables
+
 DESIGN REVISIONS THUS FAR:
 ------------------------------------
 * Removal of datavis.js file because inline chart.js implementation is easier to work with.
