@@ -47,18 +47,42 @@ def correspondence():
     mean = anime['mean'].tolist()
     return [pop, mean]
 
-def filtered_anime(cats, spec_cats):
-#function for bar graph/pie chart
-#cat and spec_cat are both arrays. cat has to have at least one
+def anime_occurrence(cats, spec_cats):
+#function for bar graph/pie chart. These are graphs that would show the occurrence of anime that fulfill these categories.
+#cat and spec_cat are both lists.
     if len(spec_cats) == 0:
+        #returns only the specified columns
         ani_fil = anime.loc[:, cats]
         return ani_fil
     else:
-        ani_fil = anime[cats]
-        return "Test. cats not working probably"
+        #returns only the rows with specified values in the columns listed
+        ani_fil = anime.loc[:, cats]
+        i = 0
+        while i < len(cats):
+            ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
+            i+= 1
+        return ani_fil
 
+#def anime_values(cats, spec_cats):
+
+def pseudo_filtered(cats, spec_cats):
+#for testing purposes only
+    #This is how it should work
+    '''ani_fil = anime.loc[:, ['source', 'broadcast_day_of_the_week']]
+    ani_fil = ani_fil[ani_fil['source'] == 'manga']
+    ani_fil = ani_fil[ani_fil['broadcast_day_of_the_week'] == 'saturday']'''
+    #This is the actual code
+    ani_fil = anime.loc[:, cats]
+    i = 0
+
+    while i < len(cats):
+        ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
+        print(ani_fil)
+        i += 1
+    return ani_fil
 def anime_name(popularity):
-    return anime.loc[anime['popularity'] == popularity]
+#effectively surches for anime based on index b/c ordered by popularity
+    return anime.loc[anime['popularity'] == popularity]['popularity']
 
 #Testing Area
 valid_data()
@@ -66,8 +90,12 @@ print(len(anime))
 #print(anime.to_string())
 #print(anime.iloc[380:400, 8:12])
 #print(anime_name(300))
-test1 = filtered_anime(['popularity', 'genres'], [])
+#print(pseudo_filtered(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
+test1 = anime_occurrence(['popularity', 'broadcast_day_of_the_week'], [])
+test2 = anime_occurrence(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday'])
 print(test1)
 print(len(test1))
+print(test2)
+print(len(test2))
 
 #print(correspondence())
