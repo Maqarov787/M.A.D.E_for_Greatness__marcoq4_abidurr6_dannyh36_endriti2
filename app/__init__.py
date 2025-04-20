@@ -14,6 +14,7 @@ from flask import render_template
 from flask import request
 from flask import session
 from flask import redirect
+from flask import url_for
 import myanimedb as db
 import json
 
@@ -36,27 +37,38 @@ def checkPassword(username, password):
 @app.route("/", methods=['GET', 'POST'])
 def main():
     if 'username' in session.keys():
-        user = json.dumps(session['username'])
-        return render_template("main.html", user = user)
+        return render_template("main.html", loggedIn="true")
     else:
-        return render_template("main.html")
+        return render_template("main.html", loggedIn="false")
 
 @app.route("/filter", methods=['GET', 'POST'])
 def filter():
     if 'username' in session.keys():
-        user = json.dumps(session['username'])
-        return render_template("filter.html", user=user)
+        return render_template("filter.html", loggedIn="true")
     else:
-        return render_template('filter.html')
+        return render_template('filter.html', loggedIn="false")
 
 @app.route("/graph", methods=['GET', 'POST'])
 def graph():
-    return render_template("graph.html")
-
+    if request.method =='POST':
+        graph = request.form.get('typeOfGraph')
+        category = request.form.get('category')
+        values = request.form.get('values')
+        print(graph)
+        print(category)
+        print(values)
+    if 'username' in session.keys():
+        return render_template("graph.html", loggedIn="true")
+    else:
+        return render_template("graph.html", loggedIn="false")
+    
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
-    return render_template("profile.html")
-
+    if 'username' in session.keys():
+        return render_template("profile.html", loggedIn="true")
+    else:
+        return render_template("profile.html", loggedIn="false")
+    
 @app.route("/signin", methods=['GET', 'POST'])
 def signin():
     if  'username' in session.keys() and session['username'] is not None:
@@ -87,7 +99,7 @@ def signup():
             return render_template('signup.html', message="Username already exists")
     return render_template("signup.html")
 
-@app.route('/logout', methods=["POST"])
+@app.route('/logout', methods=['GET', "POST"])
 def logout():
     session.pop('username', None)
     session.pop('password', None)
@@ -95,9 +107,11 @@ def logout():
 
 @app.route("/taste", methods=['GET', 'POST'])
 def taste():
-    return render_template("taste.html")
-
-
+    if 'username' in session.keys():
+        return render_template("taste.html", loggedIn="true")
+    else:
+        return render_template("taste.html", loggedIn="false")
+    
 if __name__ == "__main__":
     app.debug = True
     app.run(host='0.0.0.0', port=8000)

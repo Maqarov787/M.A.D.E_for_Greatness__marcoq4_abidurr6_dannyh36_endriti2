@@ -30,7 +30,10 @@ marcoQ -- 2025-04-06 23:51
 * Completed database mutator and accessor methods (Further testing needed and additional methods could be added once flask and sqlite3 implementation begins)
 
 endritI -- 2025-04-10 11:46
-* ADded JS features to graph.html and variables
+* Added JS features to graph.html and variables
+
+dannyH -- 2025-04-20 2:18
+*Added JS to aid login/logout button and also completed most of filter page with aided JS.
 
 DESIGN REVISIONS THUS FAR:
 ------------------------------------

@@ -17,27 +17,53 @@ Target Ship Date: 2025-04-21
     <script src="../static/frontend.js"></script>
     {% block javascript %}
         <script>
-            var user = JSON.parse({{ user | safe }})
+            var loggedIn = {{loggedIn}};
         </script>
     {% endblock %} 
-    <title>Main</title>
+    <title>Filter</title>
 </head>
 
 <body class="bg-white text-black font-sans">
-    <nav class="flex flex-row justify-between h-2/5 w-full bg-purple-800 text-white">
-        <h1 class="basis-2/3 order-first"><a href="/"">YourAnimeSite</a></h1>
-        <ul id="navItem" class="basis-1/3 order-last flex flex-row justify-between">
-            <li class="size-full hover:bg-purple-500">
+    <nav class="flex flex-row justify-between items-center h-16 w-full bg-purple-800 text-white">
+        <h1 class="basis-2/3 order-first ml-10 text-xl font-bold tracking-tight"><a href="/">YourAnimeSite</a></h1>
+        <ul id="navItem" class="basis-1/3 order-last flex flex-row justify-between h-full text-center justify-center text-xl">
+            <li class="size-full hover:bg-purple-500 flex text-center items-center justify-center">
                <a href="/filter">Filter</a>
             </li>
-            <li class="size-full hover:bg-purple-500">
-                <a href="profile/{{username}}"><img src="{{ url_for('static', filename='images/default.svg') }}" class="" alt="Profile"></a>
+            <li class="size-full hover:bg-purple-500 flex text-center items-center justify-center">
+                <a href="profile/{{username}}">Profile</a>
             </li>
-            <li class="size-full h-full hover:bg-purple-500">
-                <a href="/signin"> Log in </a>
+            <li class="size-full hover:bg-purple-500 flex text-center items-center justify-center">
+                <a href="/signin" id="login_button">Log in</a>
             </li>
         </ul>
     </nav>
+    <div class="px-7 pt-7">
+        <h1 class="font-bold text-purple-800 text-5xl underline">Filter</h1>
+        </br>
+        <p>Please select the filters to begin viewing your desired statistics</p>
+        <form action="/graph" method="POST" id='filters' class="mt-7 flex items-center flex-col">
+            <div class="relative inline-block w-1/2 my-7 border border-purple-800 rounded-md p-10 border-solid">
+              <label for="typeOfGraph" class="block text-lg font-medium text-gray-700">Choose a Graph</label>
+              <select id="typeOfGraph" name="typeOfGraph" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                <option value="" disabled selected>Select a Graph</option>
+                <option value="bar">Bar Graph</option>
+                <option value="graph">Graph</option>
+                <option value="radar">Radar Graph</option>
+              </select>
+            </div>
+            </br>
+            <div class="relative inline-block w-1/2 my-7 border border-purple-800 rounded-md p-10 border-solid">
+                <label for="category" class="block text-lg font-medium text-gray-700">Choose a Category</label>
+                <select id="category" name="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                  <option value="" disabled selected>Select a Category</option>
+                  <option value="genres">Genres</option>
+                  <option value="broadcast_day_of_the_week">Broadcast Day of the Week</option>
+                  <option value="studios">Studios</option>
+                </select>
+              </div>
+        </form>
+    </div>
 </body>
 
 </html>

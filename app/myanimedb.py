@@ -7,7 +7,6 @@ DB_FILE = "anime.db"
 def createTable():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    c.execute("DROP TABLE IF EXISTS userData")
     c.execute('''
         CREATE TABLE IF NOT EXISTS userData (
             userID INTEGER PRIMARY KEY,
@@ -104,7 +103,7 @@ def getGraph(username, colNum):
     return fin
 
 #Testing Area
-# createTable()
+createTable()
 # addUser("maq", "787")
 # addUser("sunjinwoo", "arise")
 # #addGraphColumn()
