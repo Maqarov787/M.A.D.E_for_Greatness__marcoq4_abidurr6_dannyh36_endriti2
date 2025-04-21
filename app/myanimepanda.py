@@ -63,10 +63,21 @@ def anime_occurrence(cats, spec_cats):
             i+= 1
         return ani_fil
 
-#def anime_values(cats, spec_cats):
+def mean_score(cats, spec_cats):
+    #returns a 2 item list containing the mean ranking and mean rating (in that order) of the anime that fulfill the specific filters
+    ani_fil = anime
+    i = 0
+    while i < len(cats):
+        ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
+        i+= 1
+    mean_ranking = ani_fil['popularity'].mean()
+    mean_rating = ani_fil['mean'].mean()
+    return [float(mean_ranking), float(mean_rating)]
+'''def get_specific_values(category):
+'''
 
 def pseudo_filtered(cats, spec_cats):
-#for testing purposes only
+    #for testing purposes only
     #This is how it should work
     '''ani_fil = anime.loc[:, ['source', 'broadcast_day_of_the_week']]
     ani_fil = ani_fil[ani_fil['source'] == 'manga']
@@ -97,5 +108,6 @@ print(test1)
 print(len(test1))
 print(test2)
 print(len(test2))
+print(mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 
 #print(correspondence())
