@@ -35,6 +35,9 @@ endritI -- 2025-04-10 11:46
 dannyH -- 2025-04-20 2:18
 *Added JS to aid login/logout button and also completed most of filter page with aided JS.
 
+dannyH -- 2025-04-21 11:44
+*Fixed filters and added js to profile in navbar
+
 DESIGN REVISIONS THUS FAR:
 ------------------------------------
 * Removal of datavis.js file because inline chart.js implementation is easier to work with.

@@ -37,14 +37,14 @@ def checkPassword(username, password):
 @app.route("/", methods=['GET', 'POST'])
 def main():
     if 'username' in session.keys():
-        return render_template("main.html", loggedIn="true")
+        return render_template("main.html", username = session['username'], loggedIn="true")
     else:
         return render_template("main.html", loggedIn="false")
 
 @app.route("/filter", methods=['GET', 'POST'])
 def filter():
     if 'username' in session.keys():
-        return render_template("filter.html", loggedIn="true")
+        return render_template("filter.html", username = session['username'], loggedIn="true")
     else:
         return render_template('filter.html', loggedIn="false")
 
@@ -58,14 +58,14 @@ def graph():
         print(category)
         print(values)
     if 'username' in session.keys():
-        return render_template("graph.html", loggedIn="true")
+        return render_template("graph.html", username = session['username'], loggedIn="true")
     else:
         return render_template("graph.html", loggedIn="false")
     
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
     if 'username' in session.keys():
-        return render_template("profile.html", loggedIn="true")
+        return render_template("profile.html", username = session['username'], loggedIn="true")
     else:
         return render_template("profile.html", loggedIn="false")
     
@@ -108,7 +108,7 @@ def logout():
 @app.route("/taste", methods=['GET', 'POST'])
 def taste():
     if 'username' in session.keys():
-        return render_template("taste.html", loggedIn="true")
+        return render_template("taste.html", username = session['username'], loggedIn="true")
     else:
         return render_template("taste.html", loggedIn="false")
     
