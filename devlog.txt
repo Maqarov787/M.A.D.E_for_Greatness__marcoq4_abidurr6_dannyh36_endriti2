@@ -38,6 +38,9 @@ dannyH -- 2025-04-20 2:18
 dannyH -- 2025-04-21 11:44
 *Fixed filters and added js to profile in navbar
 
+endritI -- 2025-04-21 7:30
+*Adding initial customization to graph in flask app
+
 DESIGN REVISIONS THUS FAR:
 ------------------------------------
 * Removal of datavis.js file because inline chart.js implementation is easier to work with.
