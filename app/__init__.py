@@ -37,14 +37,14 @@ def checkPassword(username, password):
 @app.route("/", methods=['GET', 'POST'])
 def main():
     if 'username' in session.keys():
-        return render_template("main.html", loggedIn="true")
+        return render_template("main.html", username = session['username'], loggedIn="true")
     else:
         return render_template("main.html", loggedIn="false")
 
 @app.route("/filter", methods=['GET', 'POST'])
 def filter():
     if 'username' in session.keys():
-        return render_template("filter.html", loggedIn="true")
+        return render_template("filter.html", username = session['username'], loggedIn="true")
     else:
         return render_template('filter.html', loggedIn="false")
 
@@ -58,14 +58,24 @@ def graph():
         print(category)
         print(values)
     if 'username' in session.keys():
-        return render_template("graph.html", loggedIn="true")
+        if (graph == 'line'):
+            return render_template("graph.html", loggedIn="true", __type__ = graph) #__label_array__ will be the names of the anime in each category, __data_array will be their ratings
+        if (graph == 'bar'):
+            return render_template("graph.html", loggedIn="true", __type__ = graph, __label_array__ = category) #__data_array__ will be the amount of animes in each category
+        if (graph == 'pie'):
+            return render_template("graph.html", loggedIn="true", __type__ = graph, __label_array__ = category) #
     else:
-        return render_template("graph.html", loggedIn="false")
+        if (graph == 'line'):
+            return render_template("graph.html", loggedIn="false", __type__ = graph)
+        if (graph == 'bar'):
+            return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = category)
+        if (graph == 'pie'):
+            return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = category)
     
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
     if 'username' in session.keys():
-        return render_template("profile.html", loggedIn="true")
+        return render_template("profile.html", username = session['username'], loggedIn="true")
     else:
         return render_template("profile.html", loggedIn="false")
     
@@ -108,7 +118,7 @@ def logout():
 @app.route("/taste", methods=['GET', 'POST'])
 def taste():
     if 'username' in session.keys():
-        return render_template("taste.html", loggedIn="true")
+        return render_template("taste.html", username = session['username'], loggedIn="true")
     else:
         return render_template("taste.html", loggedIn="false")
     
