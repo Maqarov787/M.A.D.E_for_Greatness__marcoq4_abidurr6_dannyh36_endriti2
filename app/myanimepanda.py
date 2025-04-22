@@ -77,18 +77,21 @@ def mean_score(cats, spec_cats):
     return [float(mean_ranking), float(mean_rating)]
 
 def get_specific_values(category):
-    if category == 'genres' or category == 'studios':
-        anime[category] = anime[category].apply(ast.literal_eval)
-        column = anime[category].tolist()
-        unique_values = []
-        seen = set()
-        for row in column:
-            for value in row:
-                if value not in seen:
-                    unique_values.append(value)
-                    seen.add(value)
-        #print(spec_values)
-        return unique_values
+    '''anime[category] = anime[category].apply(ast.literal_eval)
+    column = anime[category].tolist()
+    unique_values = []
+    seen = set()
+    for row in column:
+        for value in row:
+            if value not in seen:
+                unique_values.append(value)
+                seen.add(value)
+    #print(spec_values)
+    return unique_values'''
+    if category == 'genres':
+        return ['Action', 'Drama', 'Gore', 'Military', 'Shounen', 'Survival', 'Psychological', 'Supernatural', 'Suspense', 'Adventure', 'Fantasy', 'Comedy', 'Parody', 'Seinen', 'Super Power', 'Love Polygon', 'Romance', 'Video Game', 'School', 'Horror', 'Martial Arts', 'Historical', 'Romantic Subtext', 'Sci-Fi', 'Time Travel', 'Ecchi', 'Isekai', 'Strategy Game', 'Mecha', 'Music', 'Mythology', 'High Stakes Game', 'Mystery', 'Reincarnation', 'Sports', 'Team Sports', 'Adult Cast', 'Space', 'Award Winning', 'Avant Garde', 'Slice of Life', 'Gourmet', 'Detective', 'Vampire', 'Harem', 'Visual Arts', 'Shoujo', 'Samurai', 'Crossdressing', 'Reverse Harem', 'CGDCT', 'Delinquents', 'Gag Humor', 'Organized Crime', 'Otaku Culture', 'Workplace', 'Childcare', 'Iyashikei', 'Anthropomorphic', 'Educational', 'Medical', 'Showbiz', 'Kids', 'Mahou Shoujo', 'Combat Sports', 'Boys Love', 'Girls Love', 'Josei', 'Idols (Female)', 'Performing Arts', 'Racing']
+    elif category == 'studios':
+        return ['Wit Studio', 'Madhouse', 'Bones', 'A-1 Pictures', 'Pierrot', 'ufotable', 'Studio Live', 'CoMix Wave Films', 'White Fox', 'Sunrise', 'J.C.Staff', 'Kyoto Animation', 'P.A. Works', 'Toei Animation', 'MAPPA', 'asread.', 'Lerche', 'Studio Deen', 'Production I.G', 'CloverWorks', 'Studio Ghibli', 'Satelight', 'Gainax', 'Tatsunoko Production', 'Trigger', 'TMS Entertainment', 'David Production', 'Arms', 'Kinema Citrus', "Brain's Base", 'Shaft', 'TNK', '8bit', 'Manglobe', 'Tezuka Productions', 'Pierrot Plus', 'Science SARU', 'LIDENFILMS', 'Studio Bind', 'feel.', 'AIC PLUS+', 'Bridge', 'Orange', 'Doga Kobo', 'SILVER LINK.', 'Nexus', 'Graphinica', 'Nut', 'Telecom Animation Film', 'Studio VOLN', 'Seven Arcs Pictures', 'AIC Build', 'Imagin', 'Artland', 'Studio Chizu', 'Animation Do', 'Tokyo Movie Shinsha', 'GoHands', 'Gonzo', 'OLM', 'Zero-G', 'Studio Gokumi', 'Triangle Staff', 'Shuka', 'Ajia-Do', 'Production IMS', 'Zexcs', 'Connect', 'Seven Arcs', 'Pine Jam', 'Xebec', 'Passione', 'DR Movie', 'Studio 3Hz', 'Daume', 'Polygon Pictures', 'Nippon Animation', 'Shin-Ei Animation', 'Hoods Drifters Studio', 'Project No.9', 'Khara', 'TROYCA', 'Production Reed', 'Marvy Jack', 'Gallop', 'Lay-duce', 'TYO Animations', 'Signal.MD', 'ENGI', 'Silver', 'Arvo Animation', 'Studio Palette', 'Bandai Namco Pictures', 'C2C', 'SANZIGEN', 'Studio PuYUKAI', 'AIC', 'GEEK TOYS', 'Studio Colorido', 'Millepensee', 'B.CMAY PICTURES', 'EMT Squared', 'APPP', 'Seven', 'GEMBA', 'AIC Classic', 'P.I.C.S.', 'Bee Train', 'Studio Comet', 'Geno Studio', 'NAZ', 'Okuruto Noboru', 'A.C.G.T.', 'Revoroot', 'Hoods Entertainment', 'Kitty Film Mitaka Studio', 'Actas', 'Encourage Films', 'studio MOTHER', 'Studio Rikka', 'Purple Cow Studio Japan', 'HORNETS', 'Platinum Vision', 'Radix', 'Hal Film Maker', 'AIC ASTA', 'CygamesPictures', 'Maho Film', 'Asahi Production', 'AIC Spirits', "Children's Playground Entertainment", 'Studio Flad', 'Wolfsbane', 'Felix Film', 'Studio LAN', 'Haoliners Animation League', 'SynergySP', 'AXsiZ', 'production doA', 'Square Enix', 'EKACHI EPILKA', 'C-Station', 'Nomad', 'Kamikaze Douga', 'Qualia Animation']
     else:
         return anime[category].unique()
 
