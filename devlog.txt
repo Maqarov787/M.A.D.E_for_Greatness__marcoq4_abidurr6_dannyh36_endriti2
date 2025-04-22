@@ -52,3 +52,11 @@ DESIGN REVISIONS THUS FAR:
 * Removal of datavis.js file because inline chart.js implementation is easier to work with.
 * Addition of main.html as the landing page for our website to introduce new users to its purpose and features.
 ====================================
+
+HOME STRETCH CHECKLIST:
+------------------------------------
+* Complete get_specific_values function :: Marco
+* Work on HTML templates :: Abidur, Danny
+* Complete flask routing connections between flask and pandas :: Abidur
+* Troubleshooting errors :: Endrit
+====================================
