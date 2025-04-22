@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import ast
 anime = pd.read_csv("static/anime.csv")
 
 #Mutator methods
@@ -16,6 +17,7 @@ def filter_chars():
 #Warning: Consulted with the AI overlords (GPT-4o) to construct this method. The prompt given was "how would I filter out rows of data in python pandas that contain non-ascii characters?
     global anime
     anime = anime[anime["title"].apply(lambda x: x.isascii())]
+    anime = anime[anime["studios"].apply(lambda x: x.isascii())]
 
 def drop_columns():
     anime.drop(["id", "created_at", "updated_at", "alternative_titles_en", "alternative_titles_ja", "alternative_titles_synonyms"], axis=1, inplace=True)
@@ -73,8 +75,23 @@ def mean_score(cats, spec_cats):
     mean_ranking = ani_fil['popularity'].mean()
     mean_rating = ani_fil['mean'].mean()
     return [float(mean_ranking), float(mean_rating)]
-'''def get_specific_values(category):
-'''
+
+def get_specific_values(category):
+    if category == 'genres' or category == 'studios':
+        anime[category] = anime[category].apply(ast.literal_eval)
+        column = anime[category].tolist()
+        unique_values = []
+        seen = set()
+        for row in column:
+            for value in row:
+                if value not in seen:
+                    unique_values.append(value)
+                    seen.add(value)
+        #print(spec_values)
+        return unique_values
+    else:
+        return anime[category].unique()
+
 
 def pseudo_filtered(cats, spec_cats):
     #for testing purposes only
@@ -88,6 +105,7 @@ def pseudo_filtered(cats, spec_cats):
     ani_fil = anime[anime[cats[0]] == spec_cats[0]]
     while i < len(cats):
         ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
+
 def anime_name(popularity):
 #effectively surches for anime based on index b/c ordered by popularity
     return anime.loc[anime['popularity'] == popularity]['popularity']
@@ -106,5 +124,9 @@ print(len(test1))
 print(test2)
 print(len(test2))
 print(mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
+print(get_specific_values('broadcast_day_of_the_week'))
+print(get_specific_values('source'))
+print(get_specific_values('genres'))
+print(get_specific_values('studios'))
 
 #print(correspondence())
