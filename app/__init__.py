@@ -16,6 +16,7 @@ from flask import session
 from flask import redirect
 from flask import url_for
 import myanimedb as db
+import myanimepanda as db2
 import json
 
 app = Flask(__name__)
@@ -43,10 +44,13 @@ def main():
 
 @app.route("/filter", methods=['GET', 'POST'])
 def filter():
+    genres = db2.get_specific_values('genres')
+    bdfw = db2.get_specific_values('broadcast_day_of_the_week')
+    studios = db2.get_specific_values('studios')
     if 'username' in session.keys():
-        return render_template("filter.html", username = session['username'], loggedIn="true")
+        return render_template("filter.html", username = session['username'], loggedIn="true", genres = genres, bdfw = bdfw, studios = studios)
     else:
-        return render_template('filter.html', loggedIn="false")
+        return render_template('filter.html', loggedIn="false", genres = genres, bdfw = bdfw, studios = studios)
 
 @app.route("/graph", methods=['GET', 'POST'])
 def graph():

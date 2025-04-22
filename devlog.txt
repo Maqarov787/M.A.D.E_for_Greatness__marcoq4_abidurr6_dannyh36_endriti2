@@ -41,6 +41,9 @@ dannyH -- 2025-04-21 11:44
 endritI -- 2025-04-21 7:30
 *Adding initial customization to graph in flask app
 
+dannyH -- 2025-04-21 11:06 
+*Replaced 3rd filter with checkboxes and ranges, adjusted js for it
+
 DESIGN REVISIONS THUS FAR:
 ------------------------------------
 * Removal of datavis.js file because inline chart.js implementation is easier to work with.

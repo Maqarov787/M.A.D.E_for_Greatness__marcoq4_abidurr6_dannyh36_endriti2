@@ -48,26 +48,38 @@ document.addEventListener('DOMContentLoaded', function(){
 
                 newFilter.appendChild(label);
 
-
                 //each checkbox
-                const ol = document.createElement('label');
-                ol.classList.add('flex', 'items-center', 'space-x-2');
+                if (category == 'broadcast_day_of_the_week'){
+                    const options = bdfw;
+                }
+                else if (category == 'genres'){
+                    const options = genres;
+                }
+                else{
+                    const options = studios;
+                }
 
-                const o = document.createElement('input');
-                o.value ='sample';
-                o.setAttribute('name', 'values');
-                o.setAttribute('type', 'checkbox');
-                o.addEventListener('change', function() {
-                    checked = true;
-                });
+                for (const option of options){
+                    const ol = document.createElement('label');
+                    ol.classList.add('flex', 'items-center', 'space-x-2');
 
-                const ov = document.createElement('span');
-                ov.textContent = 'sample';
+                    const o = document.createElement('input');
+                    o.value =option;
+                    o.setAttribute('name', 'values');
+                    o.setAttribute('type', 'checkbox');
+                    o.addEventListener('change', function() {
+                        checked = true;
+                    });
 
-                ol.appendChild(o);
-                ol.appendChild(ov);
-        
-                newFilter.appendChild(ol);
+                    const ov = document.createElement('span');
+                    ov.textContent = option;
+
+                    ol.appendChild(o);
+                    ol.appendChild(ov);
+            
+                    newFilter.appendChild(ol);
+                }
+
             }
             else{
                 label.textContent = 'Please select a minimum and maximum';
