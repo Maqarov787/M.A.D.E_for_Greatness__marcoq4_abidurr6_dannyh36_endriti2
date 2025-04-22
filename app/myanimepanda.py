@@ -26,6 +26,9 @@ def remove_zero_mean():
     zero_values = anime[anime["mean"] == 0].index
     anime.drop(zero_values, inplace=True)
 
+def remove_null():
+    anime.dropna(inplace=True)
+
 def remove_zero_popularity():
     zero_values = anime[anime["popularity"] == 0].index
     anime.drop(zero_values, inplace=True)
@@ -36,6 +39,7 @@ def sort():
 def valid_data():
     remove_zero_mean()
     remove_zero_popularity()
+    remove_null()
     drop_columns()
     remove_nsfw()
     filter_chars()
@@ -93,7 +97,7 @@ def get_specific_values(category):
     elif category == 'studios':
         return ['Wit Studio', 'Madhouse', 'Bones', 'A-1 Pictures', 'Pierrot', 'ufotable', 'Studio Live', 'CoMix Wave Films', 'White Fox', 'Sunrise', 'J.C.Staff', 'Kyoto Animation', 'P.A. Works', 'Toei Animation', 'MAPPA', 'asread.', 'Lerche', 'Studio Deen', 'Production I.G', 'CloverWorks', 'Studio Ghibli', 'Satelight', 'Gainax', 'Tatsunoko Production', 'Trigger', 'TMS Entertainment', 'David Production', 'Arms', 'Kinema Citrus', "Brain's Base", 'Shaft', 'TNK', '8bit', 'Manglobe', 'Tezuka Productions', 'Pierrot Plus', 'Science SARU', 'LIDENFILMS', 'Studio Bind', 'feel.', 'AIC PLUS+', 'Bridge', 'Orange', 'Doga Kobo', 'SILVER LINK.', 'Nexus', 'Graphinica', 'Nut', 'Telecom Animation Film', 'Studio VOLN', 'Seven Arcs Pictures', 'AIC Build', 'Imagin', 'Artland', 'Studio Chizu', 'Animation Do', 'Tokyo Movie Shinsha', 'GoHands', 'Gonzo', 'OLM', 'Zero-G', 'Studio Gokumi', 'Triangle Staff', 'Shuka', 'Ajia-Do', 'Production IMS', 'Zexcs', 'Connect', 'Seven Arcs', 'Pine Jam', 'Xebec', 'Passione', 'DR Movie', 'Studio 3Hz', 'Daume', 'Polygon Pictures', 'Nippon Animation', 'Shin-Ei Animation', 'Hoods Drifters Studio', 'Project No.9', 'Khara', 'TROYCA', 'Production Reed', 'Marvy Jack', 'Gallop', 'Lay-duce', 'TYO Animations', 'Signal.MD', 'ENGI', 'Silver', 'Arvo Animation', 'Studio Palette', 'Bandai Namco Pictures', 'C2C', 'SANZIGEN', 'Studio PuYUKAI', 'AIC', 'GEEK TOYS', 'Studio Colorido', 'Millepensee', 'B.CMAY PICTURES', 'EMT Squared', 'APPP', 'Seven', 'GEMBA', 'AIC Classic', 'P.I.C.S.', 'Bee Train', 'Studio Comet', 'Geno Studio', 'NAZ', 'Okuruto Noboru', 'A.C.G.T.', 'Revoroot', 'Hoods Entertainment', 'Kitty Film Mitaka Studio', 'Actas', 'Encourage Films', 'studio MOTHER', 'Studio Rikka', 'Purple Cow Studio Japan', 'HORNETS', 'Platinum Vision', 'Radix', 'Hal Film Maker', 'AIC ASTA', 'CygamesPictures', 'Maho Film', 'Asahi Production', 'AIC Spirits', "Children's Playground Entertainment", 'Studio Flad', 'Wolfsbane', 'Felix Film', 'Studio LAN', 'Haoliners Animation League', 'SynergySP', 'AXsiZ', 'production doA', 'Square Enix', 'EKACHI EPILKA', 'C-Station', 'Nomad', 'Kamikaze Douga', 'Qualia Animation']
     else:
-        return anime[category].unique()
+        return list(anime[category].unique())
 
 
 def pseudo_filtered(cats, spec_cats):
