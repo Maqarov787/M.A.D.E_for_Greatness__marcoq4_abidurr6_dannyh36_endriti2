@@ -48,15 +48,20 @@ document.addEventListener('DOMContentLoaded', function(){
 
                 newFilter.appendChild(label);
 
+                var options;
+
                 //each checkbox
                 if (category == 'broadcast_day_of_the_week'){
-                    const options = bdfw;
+                    console.log('1');
+                    options = bdfw;
                 }
                 else if (category == 'genres'){
-                    const options = genres;
+                    console.log('2');
+                    options = genres;
                 }
                 else{
-                    const options = studios;
+                    console.log('3');
+                    options = studios;
                 }
 
                 for (const option of options){
@@ -136,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     submit.classList.add('mt-3', 'w-1/2', 'px-4', 'py-2', 'bg-purple-800', 'text-white', 'rounded-md', 'hover:bg-purple-700', 'focus:outline-none', 'focus:ring-2', 'focus:ring-purple-500', 'focus:ring-offset-2');
                     submit.textContent='Submit';
                     submit.setAttribute('id', 'submit')
+
                     filter.appendChild(submit);
             }
             if (category == 'broadcast_day_of_the_week' || category == 'genres' || category == 'studios'){
