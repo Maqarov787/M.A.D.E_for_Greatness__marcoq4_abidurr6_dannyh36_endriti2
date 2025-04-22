@@ -63,23 +63,12 @@ def anime_occurrence(cats, spec_cats):
             i+= 1
         return ani_fil
 
-#def anime_values(cats, spec_cats):
-
-def pseudo_filtered(cats, spec_cats):
-#for testing purposes only
-    #This is how it should work
-    '''ani_fil = anime.loc[:, ['source', 'broadcast_day_of_the_week']]
-    ani_fil = ani_fil[ani_fil['source'] == 'manga']
-    ani_fil = ani_fil[ani_fil['broadcast_day_of_the_week'] == 'saturday']'''
-    #This is the actual code
-    ani_fil = anime.loc[:, cats]
+def anime_values(cats, spec_cats):
+#function for radar graphs and average taste.
     i = 0
-
+    ani_fil = anime[anime[cats[0]] == spec_cats[0]]
     while i < len(cats):
         ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
-        print(ani_fil)
-        i += 1
-    return ani_fil
 def anime_name(popularity):
 #effectively surches for anime based on index b/c ordered by popularity
     return anime.loc[anime['popularity'] == popularity]['popularity']
