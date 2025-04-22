@@ -44,6 +44,9 @@ endritI -- 2025-04-21 7:30
 dannyH -- 2025-04-21 11:06 
 *Replaced 3rd filter with checkboxes and ranges, adjusted js for it
 
+abidurR --2025-04-21 11:47
+*Implemented routing for taste and functionality for taste template (subject to change)
+
 DESIGN REVISIONS THUS FAR:
 ------------------------------------
 * Removal of datavis.js file because inline chart.js implementation is easier to work with.
