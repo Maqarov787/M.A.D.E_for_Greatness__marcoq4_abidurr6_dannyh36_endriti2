@@ -58,18 +58,18 @@ def graph():
         print(category)
         print(values)
     if 'username' in session.keys():
-        if (graph = 'line'):
+        if (graph == 'line'):
             return render_template("graph.html", loggedIn="true", __type__ = graph) #__label_array__ will be the names of the anime in each category, __data_array will be their ratings
-        if (graph = 'bar'):
+        if (graph == 'bar'):
             return render_template("graph.html", loggedIn="true", __type__ = graph, __label_array__ = category) #__data_array__ will be the amount of animes in each category
-        if (graph = 'pie'):
+        if (graph == 'pie'):
             return render_template("graph.html", loggedIn="true", __type__ = graph, __label_array__ = category) #
     else:
-        if (graph = 'line'):
+        if (graph == 'line'):
             return render_template("graph.html", loggedIn="false", __type__ = graph)
-        if (graph = 'bar'):
+        if (graph == 'bar'):
             return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = category)
-        if (graph = 'pie'):
+        if (graph == 'pie'):
             return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = category)
     
 @app.route("/profile/<username>", methods=['GET', 'POST'])
