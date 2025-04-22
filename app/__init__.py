@@ -121,6 +121,8 @@ def logout():
 
 @app.route("/taste", methods=['GET', 'POST'])
 def taste():
+    if request.method == 'POST':
+        print(dbPanda.mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
     if 'username' in session.keys():
         return render_template("taste.html", username = session['username'], loggedIn="true")
     else:
