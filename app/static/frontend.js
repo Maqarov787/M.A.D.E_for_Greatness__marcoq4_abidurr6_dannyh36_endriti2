@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const logout = document.createElement('a');
         logout.href = '/logout';
         logout.id='logout_button';
+        logout.setAttribute('class', 'px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition" id="login_button');
         logout.textContent = "Sign Out";
 
         login.replaceWith(logout);
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function(){
     if(page == "Filter"){
         const filter = document.getElementById('filters')
         var sbutton = false;
-        var checked = false;
         document.getElementById('category').addEventListener('change', function() {
             var category = this.value;
             // Displaying additional filters
@@ -72,9 +72,6 @@ document.addEventListener('DOMContentLoaded', function(){
                     o.value =option;
                     o.setAttribute('name', 'values');
                     o.setAttribute('type', 'checkbox');
-                    o.addEventListener('change', function() {
-                        checked = true;
-                    });
 
                     const ov = document.createElement('span');
                     ov.textContent = option;
