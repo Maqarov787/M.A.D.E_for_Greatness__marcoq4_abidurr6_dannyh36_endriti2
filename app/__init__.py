@@ -61,31 +61,31 @@ def graph():
         graph = request.form.get('typeOfGraph')
         category = request.form.get('category')
         values = request.form.getlist('values')
-        print(graph)
-        print(category)
-        print(values)
+        print("graph:" + str(graph))
+        print("category:" + str(category))
+        print("values:" + str(values))
         if 'username' in session.keys():
             if (graph == 'line'):
                 return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph) #__label_array__ will be the names of the anime in each category, __data_array will be their ratings
             if (graph == 'bar'):
-                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence(db2.get_specific_values(category), values)) #__data_array__ will be the amount of animes in each category
+                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence([category], values)) #__data_array__ will be the amount of animes in each category
             if (graph == 'pie'):
-                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence(db2.get_specific_values(category), values)) #
+                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence([category], values)) #
         else:
             if (graph == 'line'):
                 return render_template("graph.html", loggedIn="false", __type__ = graph)
             if (graph =='bar'):
-                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence(db2.get_specific_values(category), values))
+                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence([category], values))
             if (graph == 'pie'):
-                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence(db2.get_specific_values(category), values))
-    
+                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = values, __label__ = category, __data_array__ = db2.anime_occurrence([category], values))
+
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
     if 'username' in session.keys():
         return render_template("profile.html", username = session['username'], loggedIn="true")
     else:
         return render_template("profile.html", loggedIn="false")
-    
+
 @app.route("/signin", methods=['GET', 'POST'])
 def signin():
     if  'username' in session.keys() and session['username'] is not None:
@@ -132,7 +132,7 @@ def taste():
         return render_template("taste.html", username = session['username'], loggedIn="true")
     else:
         return render_template("taste.html", loggedIn="false")
-    
+
 if __name__ == "__main__":
     app.debug = True
     app.run(host='0.0.0.0', port=8000)
