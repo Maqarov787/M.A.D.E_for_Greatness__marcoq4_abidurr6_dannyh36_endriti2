@@ -23,6 +23,9 @@ app = Flask(__name__)
 secret = os.urandom(32)
 app.secret_key = secret
 
+category = ''
+values = []
+
 def checkUser(username):
     user = db.getUserName(username)
     if user is None:
@@ -122,7 +125,9 @@ def logout():
 @app.route("/taste", methods=['GET', 'POST'])
 def taste():
     if request.method == 'POST':
-        print(db2.mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
+        print(db2.mean_score(db2.get_specific_values(category), values))
+        print(category)
+        print(values)
     if 'username' in session.keys():
         return render_template("taste.html", username = session['username'], loggedIn="true")
     else:
