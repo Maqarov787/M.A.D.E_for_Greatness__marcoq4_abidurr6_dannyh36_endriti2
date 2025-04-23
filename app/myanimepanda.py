@@ -63,9 +63,16 @@ def anime_occurrence(cats, spec_cats):
     else:
         #returns only the rows with specified values in the columns listed
         ani_fil = anime.loc[:, cats]
+        print(ani_fil)
         i = 0
         while i < len(cats):
-            ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
+            if cats[i] == 'genres' or cats[i] == 'studios':
+                j = 0
+                while j < len(spec_cats[i]):
+                    ani_fil = ani_fil[ani_fil[cats[i]].apply(lambda x: spec_cats[i][j] in x)]
+                    j += 1
+            else:
+                ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
             i+= 1
         return ani_fil
 
@@ -126,10 +133,13 @@ print(len(anime))
 #print(pseudo_filtered(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 # test1 = anime_occurrence(['popularity', 'broadcast_day_of_the_week'], [])
 # test2 = anime_occurrence(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday'])
+test3 = anime_occurrence(['genres', 'studios'], [['Action', 'Drama'], ['Wit Studio']])
 # print(test1)
 # print(len(test1))
 # print(test2)
 # print(len(test2))
+print(test3)
+print(len(test3))
 # print(mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 # print(get_specific_values('broadcast_day_of_the_week'))
 # print(get_specific_values('source'))
