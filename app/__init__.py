@@ -57,7 +57,7 @@ def graph():
     if request.method =='POST':
         graph = request.form.get('typeOfGraph')
         category = request.form.get('category')
-        values = request.form.get('values')
+        values = request.form.getlist('values')
         print(graph)
         print(category)
         print(values)
@@ -65,16 +65,16 @@ def graph():
             if (graph == 'line'):
                 return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph) #__label_array__ will be the names of the anime in each category, __data_array will be their ratings
             if (graph == 'bar'):
-                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = category, __label__ = 'yohoo', __data_array__ = []) #__data_array__ will be the amount of animes in each category
+                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values, __label__ = 'yohoo', __data_array__ = []) #__data_array__ will be the amount of animes in each category
             if (graph == 'pie'):
-                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = category) #
+                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values) #
         else:
             if (graph == 'line'):
                 return render_template("graph.html", loggedIn="false", __type__ = graph)
             if (graph =='bar'):
-                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = category, __label__ = 'yohoo', __data_array__ = [])
+                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = values, __label__ = 'yohoo', __data_array__ = [])
             if (graph == 'pie'):
-                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = category)
+                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = values)
     
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
