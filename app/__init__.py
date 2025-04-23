@@ -57,7 +57,7 @@ def graph():
     if request.method =='POST':
         graph = request.form.get('typeOfGraph')
         category = request.form.get('category')
-        values = request.form.get('values')
+        values = request.form.getlist('values')
         print(graph)
         print(category)
         print(values)
