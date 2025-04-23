@@ -125,14 +125,34 @@ def anime_score(cats, spec_cats):
 
 def mean_score(cats, spec_cats):
     #returns a 2 item list containing the mean ranking and mean rating (in that order) of the anime that fulfill the specific filters
-    ani_fil = anime
-    i = 0
-    while i < len(cats):
-        ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
-        i+= 1
-    mean_ranking = ani_fil['popularity'].mean()
-    mean_rating = ani_fil['mean'].mean()
-    return [float(mean_ranking), float(mean_rating)]
+    if len(spec_cats) == 0:
+        #print(cats[0])
+        #print(get_specific_values(cats[0]))
+        i = 0
+        spec_values = get_specific_values(cats[0])
+        while i < len(spec_values):
+            ani_fil = anime[anime[cats[0]] == spec_values[i]]
+            mean_ranking = ani_fil['popularity'].mean()
+            mean_rating = ani_fil['mean'].mean()
+            i += 1
+        return [int(mean_ranking), float(mean_rating)]
+    else:
+        final_values = []
+        i = 0
+        while i < len(spec_cats):
+            if cats[0] == 'genres' or cats[0] == 'studios':
+                j = 0
+                while j < len(spec_cats[i]):
+                    ani_fil = anime[anime[cats[0]].apply(lambda x: spec_cats[i][j] in x)]
+                    mean_ranking = ani_fil['popularity'].mean()
+                    mean_rating = ani_fil['mean'].mean()
+                    j += 1
+            else:
+                ani_fil = anime[anime[cats[0]] == spec_cats[i]]
+                mean_ranking = ani_fil['popularity'].mean()
+                mean_rating = ani_fil['mean'].mean()
+            i += 1
+        return [int(mean_ranking), float(mean_rating)]
 
 def get_specific_values(category):
     '''anime[category] = anime[category].apply(ast.literal_eval)
@@ -182,18 +202,24 @@ print(len(anime))
 #print(pseudo_filtered(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 #test1 = anime_occurrence(['source'], [])
 test1a = anime_score(['source'], [])
+test1b = mean_score(['source'], [])
 #test2 = anime_occurrence(['broadcast_day_of_the_week'], ['monday', 'tuesday', 'saturday'])
 test2a = anime_score(['broadcast_day_of_the_week'], ['monday', 'tuesday', 'saturday'])
+test2b = mean_score(['broadcast_day_of_the_week'], ['monday', 'tuesday', 'saturday'])
 #test3 = anime_occurrence(['genres'], [['Action', 'Drama']])
 test3a = anime_score(['genres'], [['Action', 'Drama']])
+test3b = mean_score(['genres'], [['Action', 'Drama']])
 #print(test1)
-print(test1a)
+#print(test1a)
+print(test1b)
 # print(len(test1))
 #print(test2)
-print(test2a)
+#print(test2a)
+print(test2b)
 # print(len(test2))
 #print(test3)
-print(test3a)
+#print(test3a)
+print(test3b)
 #print(len(test3))
 # print(mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 # print(get_specific_values('broadcast_day_of_the_week'))
