@@ -84,6 +84,45 @@ def anime_occurrence(cats, spec_cats):
             i += 1
         return final_count
 
+def anime_score(cats, spec_cats):
+#function for line graph. This graph would show the name of every anime that fulfills this filter and it's mean score. this outputs a length 2 2d list in which the first contains the names and the second contains the mean scores.
+#cat and spec_cat are both lists.
+    if len(spec_cats) == 0:
+        final_values = []
+        #print(cats[0])
+        #print(get_specific_values(cats[0]))
+        i = 0
+        spec_values = get_specific_values(cats[0])
+        while i < len(spec_values):
+            ani_fil = anime[anime[cats[0]] == spec_values[i]]
+            titles = list(ani_fil['title'].tolist())
+            mean_scores = list(ani_fil['mean'].tolist())
+            final_values.append(titles)
+            final_values.append(mean_scores)
+            i += 1
+        return final_values
+    else:
+        final_values = []
+        i = 0
+        while i < len(spec_cats):
+            if cats[0] == 'genres' or cats[0] == 'studios':
+                j = 0
+                while j < len(spec_cats[i]):
+                    ani_fil = anime[anime[cats[0]].apply(lambda x: spec_cats[i][j] in x)]
+                    titles = list(ani_fil['title'].tolist())
+                    mean_scores = list(ani_fil['mean'].tolist())
+                    final_values.append(titles)
+                    final_values.append(mean_scores)
+                    j += 1
+            else:
+                ani_fil = anime[anime[cats[0]] == spec_cats[i]]
+                titles = list(ani_fil['title'].tolist())
+                mean_scores = list(ani_fil['mean'].tolist())
+                final_values.append(titles)
+                final_values.append(mean_scores)
+            i += 1
+        return final_values
+
 def mean_score(cats, spec_cats):
     #returns a 2 item list containing the mean ranking and mean rating (in that order) of the anime that fulfill the specific filters
     ani_fil = anime
@@ -142,13 +181,19 @@ print(len(anime))
 #print(anime_name(300))
 #print(pseudo_filtered(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 #test1 = anime_occurrence(['source'], [])
+test1a = anime_score(['source'], [])
 #test2 = anime_occurrence(['broadcast_day_of_the_week'], ['monday', 'tuesday', 'saturday'])
+test2a = anime_score(['broadcast_day_of_the_week'], ['monday', 'tuesday', 'saturday'])
 #test3 = anime_occurrence(['genres'], [['Action', 'Drama']])
+test3a = anime_score(['genres'], [['Action', 'Drama']])
 #print(test1)
+print(test1a)
 # print(len(test1))
 #print(test2)
+print(test2a)
 # print(len(test2))
 #print(test3)
+print(test3a)
 #print(len(test3))
 # print(mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 # print(get_specific_values('broadcast_day_of_the_week'))
