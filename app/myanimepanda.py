@@ -57,24 +57,32 @@ def anime_occurrence(cats, spec_cats):
 #function for bar graph/pie chart. These are graphs that would show the occurrence of anime that fulfill these categories.
 #cat and spec_cat are both lists.
     if len(spec_cats) == 0:
-        #returns only the specified columns
-        ani_fil = anime.loc[:, cats]
-        return ani_fil
-    else:
-        #returns only the rows with specified values in the columns listed
-        ani_fil = anime.loc[:, cats]
-        print(ani_fil)
+        final_count = []
+        #print(cats[0])
+        #print(get_specific_values(cats[0]))
         i = 0
-        while i < len(cats):
-            if cats[i] == 'genres' or cats[i] == 'studios':
+        spec_values = get_specific_values(cats[0])
+        while i < len(spec_values):
+            count = len(anime[anime[cats[0]] == spec_values[i]])
+            #print("specific value iterated:" + str(spec_values[i]))
+            final_count.append(count)
+            i += 1
+        return final_count
+    else:
+        final_count = []
+        i = 0
+        while i < len(spec_cats):
+            if cats[0] == 'genres' or cats[0] == 'studios':
                 j = 0
                 while j < len(spec_cats[i]):
-                    ani_fil = ani_fil[ani_fil[cats[i]].apply(lambda x: spec_cats[i][j] in x)]
+                    count = len(anime[anime[cats[0]].apply(lambda x: spec_cats[i][j] in x)])
+                    final_count.append(count)
                     j += 1
             else:
-                ani_fil = ani_fil[ani_fil[cats[i]] == spec_cats[i]]
-            i+= 1
-        return ani_fil
+                count = len(anime[anime[cats[0]] == spec_cats[i]])
+                final_count.append(count)
+            i += 1
+        return final_count
 
 def mean_score(cats, spec_cats):
     #returns a 2 item list containing the mean ranking and mean rating (in that order) of the anime that fulfill the specific filters
@@ -107,6 +115,8 @@ def get_specific_values(category):
         return list(anime[category].unique())
 
 
+
+
 def pseudo_filtered(cats, spec_cats):
     #for testing purposes only
     #This is how it should work
@@ -131,15 +141,15 @@ print(len(anime))
 #print(anime.iloc[380:400, 8:12])
 #print(anime_name(300))
 #print(pseudo_filtered(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
-# test1 = anime_occurrence(['popularity', 'broadcast_day_of_the_week'], [])
-# test2 = anime_occurrence(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday'])
-test3 = anime_occurrence(['genres', 'studios'], [['Action', 'Drama'], ['Wit Studio']])
-# print(test1)
+#test1 = anime_occurrence(['source'], [])
+#test2 = anime_occurrence(['broadcast_day_of_the_week'], ['monday', 'tuesday', 'saturday'])
+#test3 = anime_occurrence(['genres'], [['Action', 'Drama']])
+#print(test1)
 # print(len(test1))
-# print(test2)
+#print(test2)
 # print(len(test2))
-print(test3)
-print(len(test3))
+#print(test3)
+#print(len(test3))
 # print(mean_score(['source', 'broadcast_day_of_the_week'], ['manga', 'saturday']))
 # print(get_specific_values('broadcast_day_of_the_week'))
 # print(get_specific_values('source'))
