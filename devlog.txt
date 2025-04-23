@@ -44,8 +44,11 @@ endritI -- 2025-04-21 7:30
 dannyH -- 2025-04-21 11:06 
 *Replaced 3rd filter with checkboxes and ranges, adjusted js for it
 
-abidurR --2025-04-21 11:47
+abidurR -- 2025-04-21 11:47
 *Implemented routing for taste and functionality for taste template (subject to change)
+
+dannyH -- 2025-04-22 11:30
+*Filter Page done + trouble shooting for graph conneciton
 
 DESIGN REVISIONS THUS FAR:
 ------------------------------------

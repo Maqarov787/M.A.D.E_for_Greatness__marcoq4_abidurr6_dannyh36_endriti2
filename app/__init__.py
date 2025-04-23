@@ -100,7 +100,7 @@ def signin():
         session['username'] = username
         session['password'] = password
         return redirect('/')
-    return render_template("signin.html")
+    return render_template("signin.html", loggedIn='false')
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -114,7 +114,7 @@ def signup():
             return redirect('/signin')
         else:
             return render_template('signup.html', message="Username already exists")
-    return render_template("signup.html")
+    return render_template("signup.html", loggedIn='false')
 
 @app.route('/logout', methods=['GET', "POST"])
 def logout():
