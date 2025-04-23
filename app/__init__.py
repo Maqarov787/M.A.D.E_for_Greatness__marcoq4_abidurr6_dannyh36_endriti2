@@ -61,9 +61,13 @@ def graph():
         graph = request.form.get('typeOfGraph')
         category = request.form.get('category')
         values = request.form.getlist('values')
+
         print("graph:" + str(graph))
         print("category:" + str(category))
         print("values:" + str(values))
+        print(db2.mean_score([category], values))
+        
+
         if 'username' in session.keys():
             if (graph == 'line'):
                 return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = db2.anime_score([category],values)[0], __label__ = str(category), __data_array__ = db2.anime_score([category],values)[1]) #__label_array__ will be the names of the anime in each category, __data_array will be their ratings
