@@ -54,6 +54,7 @@ DESIGN REVISIONS THUS FAR:
 ------------------------------------
 * Removal of datavis.js file because inline chart.js implementation is easier to work with.
 * Addition of main.html as the landing page for our website to introduce new users to its purpose and features.
+* Changed task assignments for DAR and DDH.
 ====================================
 
 HOME STRETCH CHECKLIST:
