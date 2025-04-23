@@ -66,14 +66,14 @@ def graph():
         print("values:" + str(values))
         if 'username' in session.keys():
             if (graph == 'line'):
-                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph) #__label_array__ will be the names of the anime in each category, __data_array will be their ratings
+                return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = db2.anime_score([category],values)[0], __label__ = str(category), __data_array__ = db2.anime_score([category],values)[1]) #__label_array__ will be the names of the anime in each category, __data_array will be their ratings
             if (graph == 'bar'):
                 return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values, __label__ = str(category), __data_array__ = db2.anime_occurrence([category], values)) #__data_array__ will be the amount of animes in each category
             if (graph == 'pie'):
                 return render_template("graph.html", username = session['username'], loggedIn="true", __type__ = graph, __label_array__ = values, __label__ = str(category), __data_array__ = db2.anime_occurrence([category], values)) #
         else:
             if (graph == 'line'):
-                return render_template("graph.html", loggedIn="false", __type__ = graph)
+                return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = db2.anime_score([category],values)[0], __label__ = str(category), __data_array__ = db2.anime_score([category],values)[1])
             if (graph =='bar'):
                 return render_template("graph.html", loggedIn="false", __type__ = graph, __label_array__ = values, __label__ = str(category), __data_array__ = db2.anime_occurrence([category], values))
             if (graph == 'pie'):
