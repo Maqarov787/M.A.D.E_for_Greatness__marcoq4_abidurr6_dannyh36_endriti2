@@ -51,3 +51,14 @@
 OR
 
 1. Click <a href="http://maqarovgulag.tech">this link</a> to visit our website. No further installations required.
+
+### FEATURE SPOTLIGHT
+* explore the pie chart on filter
+* play around with the different filter options (let us know the highest mean rating you got. Our current record is an 8.3 by selecting broadcast day of the week and selecting friday, saturday and sunday)
+* take a look at the mutator methods in myanimepanda.py to see how we filtered the initial set of data
+
+### KNOWN BUGS/ISSUES
+* the pie chart is not presenting the data accurately
+* profile page is empty (not enough time to implement changes to database and html pages)
+* the get_specific_values function is currently working but the original version is working but commented out (the error is not in myanimepanda.py but in the values that it returns. The error has something to do with ast.literal_eval)
+* taste page is a glorified gag page (there was an issue with passing the mean ranking and rating as variables from flask into the jinja template)
